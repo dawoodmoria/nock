@@ -1,0 +1,903 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>VirexaSoft — 4-Month Elite Training Roadmap</title>
+<style>
+  :root {
+    --bg: #0a0a0f;
+    --bg2: #111118;
+    --bg3: #1a1a24;
+    --border: rgba(255,255,255,0.08);
+    --border2: rgba(255,255,255,0.15);
+    --text: #e8e8f0;
+    --muted: #888899;
+    --accent: #7c6ff7;
+    --accent2: #5dc8a5;
+    --accent3: #f0904a;
+    --accent4: #e85d5d;
+    --accent5: #4aabf0;
+    --yellow: #f5c842;
+  }
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  body { background: var(--bg); color: var(--text); font-family: 'Segoe UI', system-ui, sans-serif; font-size: 14px; line-height: 1.6; }
+
+  /* HEADER */
+  .header { background: var(--bg2); border-bottom: 1px solid var(--border); padding: 2rem; text-align: center; }
+  .header h1 { font-size: 2rem; font-weight: 700; color: var(--accent); letter-spacing: 2px; }
+  .header p { color: var(--muted); margin-top: 0.4rem; font-size: 0.9rem; letter-spacing: 1px; }
+  .stats-row { display: flex; justify-content: center; gap: 2rem; margin-top: 1.2rem; flex-wrap: wrap; }
+  .stat { background: var(--bg3); border: 1px solid var(--border); border-radius: 8px; padding: 0.6rem 1.2rem; font-size: 0.8rem; }
+  .stat span { color: var(--accent); font-weight: 700; font-size: 1.1rem; display: block; }
+
+  /* NAV */
+  nav { display: flex; overflow-x: auto; background: var(--bg2); border-bottom: 1px solid var(--border); }
+  nav button { background: none; border: none; color: var(--muted); padding: 1rem 1.4rem; cursor: pointer; font-size: 0.8rem; font-weight: 600; letter-spacing: 1px; text-transform: uppercase; white-space: nowrap; transition: all 0.2s; border-bottom: 2px solid transparent; }
+  nav button.active, nav button:hover { color: var(--text); border-bottom-color: var(--accent); background: rgba(124,111,247,0.07); }
+
+  /* CONTENT */
+  .tab { display: none; padding: 2rem; max-width: 1100px; margin: 0 auto; }
+  .tab.active { display: block; }
+
+  /* SECTION HEADERS */
+  .section-title { font-size: 1.1rem; font-weight: 700; color: var(--accent); text-transform: uppercase; letter-spacing: 2px; margin: 2rem 0 1rem; padding-bottom: 0.5rem; border-bottom: 1px solid var(--border); }
+  .month-badge { display: inline-block; background: var(--accent); color: #fff; border-radius: 4px; padding: 2px 10px; font-size: 0.7rem; font-weight: 700; letter-spacing: 1px; text-transform: uppercase; margin-bottom: 0.5rem; }
+  .month-title { font-size: 1.6rem; font-weight: 700; margin-bottom: 0.3rem; }
+  .month-sub { color: var(--muted); font-size: 0.9rem; margin-bottom: 1.5rem; }
+
+  /* WEEK CARDS */
+  .week-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(480px, 1fr)); gap: 1.2rem; margin-bottom: 1.5rem; }
+  .week-card { background: var(--bg2); border: 1px solid var(--border); border-radius: 10px; overflow: hidden; }
+  .week-header { display: flex; align-items: center; gap: 0.8rem; padding: 0.9rem 1.2rem; background: var(--bg3); border-bottom: 1px solid var(--border); }
+  .week-num { background: var(--accent); color: #fff; border-radius: 4px; padding: 2px 8px; font-size: 0.7rem; font-weight: 700; }
+  .week-title { font-weight: 600; font-size: 0.95rem; }
+  .week-body { padding: 1rem 1.2rem; }
+
+  /* DAY ROWS */
+  .day-row { display: flex; gap: 0.8rem; padding: 0.5rem 0; border-bottom: 1px solid var(--border); }
+  .day-row:last-child { border-bottom: none; }
+  .day-label { color: var(--accent); font-weight: 700; font-size: 0.75rem; min-width: 28px; padding-top: 2px; }
+  .day-content { flex: 1; }
+  .day-main { font-size: 0.85rem; font-weight: 500; }
+  .day-sub { font-size: 0.78rem; color: var(--muted); margin-top: 2px; }
+  .tag { display: inline-block; border-radius: 3px; padding: 1px 6px; font-size: 0.68rem; font-weight: 600; margin-right: 4px; }
+  .tag-ds { background: rgba(124,111,247,0.2); color: var(--accent); }
+  .tag-cy { background: rgba(93,200,165,0.2); color: var(--accent2); }
+  .tag-fx { background: rgba(240,144,74,0.2); color: var(--accent3); }
+  .tag-ai { background: rgba(74,171,240,0.2); color: var(--accent5); }
+  .tag-cl { background: rgba(245,200,66,0.2); color: var(--yellow); }
+  .tag-dv { background: rgba(232,93,93,0.2); color: var(--accent4); }
+
+  /* PROJECT CARD */
+  .project-card { background: var(--bg3); border: 1px solid var(--border2); border-left: 3px solid var(--accent); border-radius: 8px; padding: 1rem; margin: 0.8rem 0; }
+  .project-card.green { border-left-color: var(--accent2); }
+  .project-card.orange { border-left-color: var(--accent3); }
+  .project-card.blue { border-left-color: var(--accent5); }
+  .project-card.yellow { border-left-color: var(--yellow); }
+  .project-card.red { border-left-color: var(--accent4); }
+  .project-title { font-weight: 700; font-size: 0.9rem; margin-bottom: 0.3rem; }
+  .project-desc { font-size: 0.8rem; color: var(--muted); }
+
+  /* LINKS */
+  .link-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(260px, 1fr)); gap: 0.7rem; margin: 1rem 0; }
+  .link-card { background: var(--bg3); border: 1px solid var(--border); border-radius: 8px; padding: 0.7rem 1rem; display: flex; align-items: center; gap: 0.7rem; text-decoration: none; color: var(--text); transition: border-color 0.2s; }
+  .link-card:hover { border-color: var(--border2); }
+  .link-icon { width: 28px; height: 28px; border-radius: 6px; display: flex; align-items: center; justify-content: center; font-size: 14px; flex-shrink: 0; }
+  .link-card .lname { font-weight: 600; font-size: 0.82rem; }
+  .link-card .ldesc { font-size: 0.74rem; color: var(--muted); }
+
+  /* CLIENT SYSTEM */
+  .system-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(300px, 1fr)); gap: 1rem; }
+  .system-card { background: var(--bg2); border: 1px solid var(--border); border-radius: 10px; padding: 1.2rem; }
+  .system-card h3 { font-size: 0.9rem; font-weight: 700; margin-bottom: 0.8rem; color: var(--accent); }
+  .system-card ul { list-style: none; }
+  .system-card ul li { font-size: 0.82rem; color: var(--muted); padding: 0.25rem 0; display: flex; gap: 0.5rem; }
+  .system-card ul li::before { content: "→"; color: var(--accent2); flex-shrink: 0; }
+
+  /* SCHEDULE TABLE */
+  .schedule-table { width: 100%; border-collapse: collapse; font-size: 0.8rem; margin: 1rem 0; }
+  .schedule-table th { background: var(--bg3); color: var(--accent); font-weight: 700; padding: 0.6rem 0.8rem; text-align: left; font-size: 0.72rem; letter-spacing: 1px; text-transform: uppercase; border-bottom: 1px solid var(--border2); }
+  .schedule-table td { padding: 0.55rem 0.8rem; border-bottom: 1px solid var(--border); vertical-align: top; }
+  .schedule-table tr:hover td { background: rgba(255,255,255,0.02); }
+
+  /* TRACKER */
+  .tracker-row { display: flex; align-items: center; gap: 1rem; padding: 0.6rem 0; border-bottom: 1px solid var(--border); }
+  .tracker-row:last-child { border-bottom: none; }
+  .tracker-label { min-width: 160px; font-size: 0.82rem; }
+  .bar-bg { flex: 1; height: 6px; background: var(--bg3); border-radius: 3px; overflow: hidden; }
+  .bar-fill { height: 100%; border-radius: 3px; }
+  .tracker-pct { font-size: 0.75rem; color: var(--muted); min-width: 36px; text-align: right; }
+
+  /* SCRIPT BOX */
+  .script-box { background: var(--bg3); border: 1px solid var(--border); border-radius: 8px; padding: 1rem 1.2rem; font-size: 0.82rem; line-height: 1.7; color: var(--text); font-style: italic; margin: 0.7rem 0; }
+  .script-box strong { color: var(--accent2); font-style: normal; }
+
+  /* DAILY ROUTINE */
+  .routine-table { width: 100%; }
+  .routine-row { display: flex; gap: 1rem; padding: 0.5rem 0; border-bottom: 1px solid var(--border); align-items: flex-start; }
+  .routine-time { color: var(--accent5); font-weight: 700; font-size: 0.78rem; min-width: 100px; padding-top: 2px; }
+  .routine-task { font-size: 0.83rem; }
+  .routine-hrs { color: var(--muted); font-size: 0.75rem; min-width: 45px; text-align: right; }
+
+  /* CHECKPOINT */
+  .checkpoint-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(220px, 1fr)); gap: 0.8rem; }
+  .checkpoint { background: var(--bg2); border: 1px solid var(--border); border-radius: 8px; padding: 1rem; }
+  .checkpoint .month { font-size: 0.7rem; font-weight: 700; text-transform: uppercase; color: var(--accent); margin-bottom: 0.3rem; letter-spacing: 1px; }
+  .checkpoint ul { list-style: none; }
+  .checkpoint ul li { font-size: 0.79rem; color: var(--muted); padding: 0.2rem 0; display: flex; gap: 0.4rem; }
+  .checkpoint ul li::before { content: "✓"; color: var(--accent2); }
+
+  /* PROPOSAL TEMPLATE */
+  .proposal { background: var(--bg3); border: 1px solid var(--border); border-radius: 10px; padding: 1.4rem; font-size: 0.83rem; line-height: 1.8; }
+  .proposal p { margin-bottom: 0.8rem; }
+  .proposal .ph { color: var(--accent3); font-weight: 700; }
+
+  /* TOOLS GRID */
+  .tools-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(160px, 1fr)); gap: 0.8rem; }
+  .tool-card { background: var(--bg2); border: 1px solid var(--border); border-radius: 8px; padding: 0.9rem; text-align: center; }
+  .tool-card .tname { font-weight: 700; font-size: 0.85rem; margin-top: 0.3rem; }
+  .tool-card .tuse { font-size: 0.75rem; color: var(--muted); margin-top: 0.2rem; }
+
+  /* FOOTER */
+  footer { text-align: center; padding: 2rem; color: var(--muted); font-size: 0.78rem; border-top: 1px solid var(--border); margin-top: 3rem; }
+
+  @media (max-width: 600px) {
+    .week-grid { grid-template-columns: 1fr; }
+    .header h1 { font-size: 1.4rem; }
+    nav button { padding: 0.8rem 0.9rem; font-size: 0.72rem; }
+    .tab { padding: 1rem; }
+  }
+</style>
+</head>
+<body>
+
+<div class="header">
+  <h1>◈ VIREXASOFT SOLUTIONS</h1>
+  <p>4-MONTH ELITE TRAINING PROTOCOL · ZERO TO INDUSTRY-READY</p>
+  <div class="stats-row">
+    <div class="stat"><span>10–14</span>Hours/Day</div>
+    <div class="stat"><span>16</span>Weeks</div>
+    <div class="stat"><span>6</span>Domains</div>
+    <div class="stat"><span>20+</span>Projects</div>
+    <div class="stat"><span>$5k+</span>First Client Target</div>
+  </div>
+</div>
+
+<nav>
+  <button class="active" onclick="show('overview')">Overview</button>
+  <button onclick="show('month1')">Month 1</button>
+  <button onclick="show('month2')">Month 2</button>
+  <button onclick="show('month3')">Month 3</button>
+  <button onclick="show('month4')">Month 4</button>
+  <button onclick="show('clients')">Client System</button>
+  <button onclick="show('resources')">Resources</button>
+  <button onclick="show('tracker')">Tracker</button>
+</nav>
+
+<!-- ===== OVERVIEW ===== -->
+<div id="overview" class="tab active">
+
+  <div class="section-title">Daily War Schedule (Every Single Day)</div>
+  <div class="routine-table">
+    <div class="routine-row" style="background:var(--bg3);border-radius:6px 6px 0 0;padding: 0.5rem 0.8rem;">
+      <span class="routine-time" style="font-size:0.7rem;text-transform:uppercase;letter-spacing:1px;">Time Block</span>
+      <span class="routine-task" style="font-size:0.7rem;text-transform:uppercase;letter-spacing:1px;color:var(--muted);">Activity</span>
+      <span class="routine-hrs" style="font-size:0.7rem;text-transform:uppercase;letter-spacing:1px;color:var(--muted);">Hours</span>
+    </div>
+    <div class="routine-row"><span class="routine-time">05:00 – 05:30</span><span class="routine-task">Wake up. Cold water. No phone. Review today's mission.</span><span class="routine-hrs">0.5h</span></div>
+    <div class="routine-row"><span class="routine-time">05:30 – 08:30</span><span class="routine-task"><strong>Deep Work Block 1</strong> — Primary skill (DS / Cyber / AI based on week)</span><span class="routine-hrs">3h</span></div>
+    <div class="routine-row"><span class="routine-time">08:30 – 09:00</span><span class="routine-task">Break + eat. No social media.</span><span class="routine-hrs">0.5h</span></div>
+    <div class="routine-row"><span class="routine-time">09:00 – 12:00</span><span class="routine-task"><strong>Deep Work Block 2</strong> — Secondary skill (Forex / DevOps / Client Hunting)</span><span class="routine-hrs">3h</span></div>
+    <div class="routine-row"><span class="routine-time">12:00 – 13:00</span><span class="routine-task">Lunch + short walk. Review notes.</span><span class="routine-hrs">1h</span></div>
+    <div class="routine-row"><span class="routine-time">13:00 – 16:00</span><span class="routine-task"><strong>Hands-on Build Block</strong> — Code, project work, labs, CTFs</span><span class="routine-hrs">3h</span></div>
+    <div class="routine-row"><span class="routine-time">16:00 – 16:30</span><span class="routine-task">Break. Short nap if needed.</span><span class="routine-hrs">0.5h</span></div>
+    <div class="routine-row"><span class="routine-time">16:30 – 19:00</span><span class="routine-task"><strong>Deep Work Block 3</strong> — Weak area catch-up OR client hunting tasks</span><span class="routine-hrs">2.5h</span></div>
+    <div class="routine-row"><span class="routine-time">19:00 – 20:00</span><span class="routine-task">Dinner. Family time. No work.</span><span class="routine-hrs">1h</span></div>
+    <div class="routine-row"><span class="routine-time">20:00 – 22:30</span><span class="routine-task"><strong>Review + Documentation Block</strong> — GitHub commits, trading journal, notes</span><span class="routine-hrs">2.5h</span></div>
+    <div class="routine-row"><span class="routine-time">22:30 – 23:00</span><span class="routine-task">Plan tomorrow. Write 3 wins + 1 failure of the day.</span><span class="routine-hrs">0.5h</span></div>
+  </div>
+  <p style="color:var(--muted);font-size:0.78rem;margin-top:0.5rem;">Total: 12–14 hours productive daily. No excuses. No days off in Month 1 & 2.</p>
+
+  <div class="section-title">6-Domain Skill Map</div>
+  <div class="week-grid">
+    <div class="week-card">
+      <div class="week-header"><span class="week-num" style="background:var(--accent);">DS</span><span class="week-title">Data Science Path</span></div>
+      <div class="week-body">
+        <div class="day-row"><span class="day-label" style="color:var(--accent);">M1</span><div class="day-content"><div class="day-main">Python Basics → Pandas → NumPy → Matplotlib</div></div></div>
+        <div class="day-row"><span class="day-label" style="color:var(--accent);">M2</span><div class="day-content"><div class="day-main">Statistics → EDA → Feature Engineering</div></div></div>
+        <div class="day-row"><span class="day-label" style="color:var(--accent);">M3</span><div class="day-content"><div class="day-main">ML (Supervised + Unsupervised) → Model Deployment</div></div></div>
+        <div class="day-row"><span class="day-label" style="color:var(--accent);">M4</span><div class="day-content"><div class="day-main">Deep Learning + NLP + End-to-End Projects</div></div></div>
+      </div>
+    </div>
+    <div class="week-card">
+      <div class="week-header"><span class="week-num" style="background:var(--accent2);">CY</span><span class="week-title">Cybersecurity Path</span></div>
+      <div class="week-body">
+        <div class="day-row"><span class="day-label" style="color:var(--accent2);">M1</span><div class="day-content"><div class="day-main">Networking Fundamentals → Linux → CLI Mastery</div></div></div>
+        <div class="day-row"><span class="day-label" style="color:var(--accent2);">M2</span><div class="day-content"><div class="day-main">Ethical Hacking → Nmap → Metasploit → Burp Suite</div></div></div>
+        <div class="day-row"><span class="day-label" style="color:var(--accent2);">M3</span><div class="day-content"><div class="day-main">Web Security (OWASP Top 10) → CTF Labs</div></div></div>
+        <div class="day-row"><span class="day-label" style="color:var(--accent2);">M4</span><div class="day-content"><div class="day-main">Bug Bounty → Reports → HackTheBox → TryHackMe</div></div></div>
+      </div>
+    </div>
+    <div class="week-card">
+      <div class="week-header"><span class="week-num" style="background:var(--accent3);">FX</span><span class="week-title">Forex Trading Path</span></div>
+      <div class="week-body">
+        <div class="day-row"><span class="day-label" style="color:var(--accent3);">M1</span><div class="day-content"><div class="day-main">Forex Basics → Candlesticks → Chart Types → Sessions</div></div></div>
+        <div class="day-row"><span class="day-label" style="color:var(--accent3);">M2</span><div class="day-content"><div class="day-main">Technical Analysis → Support/Resistance → Indicators</div></div></div>
+        <div class="day-row"><span class="day-label" style="color:var(--accent3);">M3</span><div class="day-content"><div class="day-main">Price Action → ICT Concepts → Strategy Building</div></div></div>
+        <div class="day-row"><span class="day-label" style="color:var(--accent3);">M4</span><div class="day-content"><div class="day-main">Risk Management → Backtesting → Demo Trading</div></div></div>
+      </div>
+    </div>
+    <div class="week-card">
+      <div class="week-header"><span class="week-num" style="background:var(--accent5);">AI</span><span class="week-title">AI / SaaS / DevOps</span></div>
+      <div class="week-body">
+        <div class="day-row"><span class="day-label" style="color:var(--accent5);">M2</span><div class="day-content"><div class="day-main">APIs → OpenAI API → Automation Workflows</div></div></div>
+        <div class="day-row"><span class="day-label" style="color:var(--accent5);">M3</span><div class="day-content"><div class="day-main">Build AI SaaS MVP → Stripe Integration</div></div></div>
+        <div class="day-row"><span class="day-label" style="color:var(--accent5);">M3</span><div class="day-content"><div class="day-main">Docker → AWS EC2 → Deploy full apps</div></div></div>
+        <div class="day-row"><span class="day-label" style="color:var(--accent5);">M4</span><div class="day-content"><div class="day-main">Polish products → CI/CD → Launch VirexaSoft SaaS</div></div></div>
+      </div>
+    </div>
+  </div>
+
+  <div class="section-title">20+ Projects You Will Build</div>
+  <div style="display:grid;grid-template-columns:repeat(auto-fill,minmax(280px,1fr));gap:0.8rem;">
+    <div class="project-card"><div class="project-title">EDA Dashboard</div><div class="project-desc">Pandas + Plotly + Streamlit — deploy on Render</div></div>
+    <div class="project-card green"><div class="project-title">Port Scanner (Python)</div><div class="project-desc">Socket-based scanner with banner grabbing</div></div>
+    <div class="project-card orange"><div class="project-title">Forex Journal App</div><div class="project-desc">Trade log, P&amp;L calc, risk metrics — Python+SQLite</div></div>
+    <div class="project-card blue"><div class="project-title">AI Email Writer SaaS</div><div class="project-desc">OpenAI API + Stripe + deploy on AWS</div></div>
+    <div class="project-card"><div class="project-title">House Price Predictor</div><div class="project-desc">End-to-end ML pipeline with Flask API</div></div>
+    <div class="project-card green"><div class="project-title">Burp Suite Web Audit Lab</div><div class="project-desc">DVWA + documented vulnerability report</div></div>
+    <div class="project-card orange"><div class="project-title">Backtesting Engine</div><div class="project-desc">Python + Backtrader + strategy evaluation</div></div>
+    <div class="project-card blue"><div class="project-title">AI Chatbot SaaS</div><div class="project-desc">Multi-turn chat, user auth, subscription billing</div></div>
+    <div class="project-card"><div class="project-title">NLP Sentiment Analyzer</div><div class="project-desc">Twitter/news data → real-time dashboard</div></div>
+    <div class="project-card green"><div class="project-title">CTF Write-up Portfolio</div><div class="project-desc">5+ HackTheBox / TryHackMe documented solutions</div></div>
+    <div class="project-card yellow"><div class="project-title">VirexaSoft Portfolio Site</div><div class="project-desc">Personal brand + case studies + contact form</div></div>
+    <div class="project-card red"><div class="project-title">Dockerized ML App</div><div class="project-desc">ML model containerized + deployed on AWS EC2</div></div>
+  </div>
+</div>
+
+<!-- ===== MONTH 1 ===== -->
+<div id="month1" class="tab">
+  <span class="month-badge">Month 1</span>
+  <div class="month-title">Foundations — Python · Linux · Networking · Forex Basics</div>
+  <div class="month-sub">Weeks 1–4 · Build the base that every skill sits on. No shortcuts.</div>
+
+  <div class="week-grid">
+
+    <!-- WEEK 1 -->
+    <div class="week-card">
+      <div class="week-header"><span class="week-num">W1</span><span class="week-title">Python Foundations + Networking 101</span></div>
+      <div class="week-body">
+        <div class="day-row"><span class="day-label">MON</span><div class="day-content"><div class="day-main"><span class="tag tag-ds">DS</span>Python install, VS Code setup, variables, data types</div><div class="day-sub">CampusX Python Series Ep 1–3 · Task: 10 variable/type exercises</div></div></div>
+        <div class="day-row"><span class="day-label">TUE</span><div class="day-content"><div class="day-main"><span class="tag tag-ds">DS</span>Conditionals, loops, functions</div><div class="day-sub">CampusX Ep 4–7 · Task: Build a calculator + number guessing game</div></div></div>
+        <div class="day-row"><span class="day-label">WED</span><div class="day-content"><div class="day-main"><span class="tag tag-ds">DS</span>Lists, tuples, dicts, sets · OOP basics</div><div class="day-sub">CodeWithHarry Python playlist Ep 10–16 · Task: Student grade system OOP</div></div></div>
+        <div class="day-row"><span class="day-label">THU</span><div class="day-content"><div class="day-main"><span class="tag tag-cy">CY</span>Networking: OSI model, TCP/IP, DNS, HTTP, ports</div><div class="day-sub">Gate Smashers Networking playlist · Task: Map OSI to real examples doc</div></div></div>
+        <div class="day-row"><span class="day-label">FRI</span><div class="day-content"><div class="day-main"><span class="tag tag-cy">CY</span>Linux install (Kali/Ubuntu VM), basic CLI commands</div><div class="day-sub">NetworkChuck Linux ep 1–4 · Task: 50 CLI commands practice sheet</div></div></div>
+        <div class="day-row"><span class="day-label">SAT</span><div class="day-content"><div class="day-main"><span class="tag tag-fx">FX</span>Forex basics: pairs, pip, lot size, broker setup</div><div class="day-sub">Rayner Teo "Forex for Beginners" series · Task: Open demo account (XM/IC Markets)</div></div></div>
+        <div class="day-row"><span class="day-label">SUN</span><div class="day-content"><div class="day-main">Week review. Push all code to GitHub. Document learnings.</div><div class="day-sub">Setup GitHub profile. Push Week 1 code. Write README.</div></div></div>
+      </div>
+    </div>
+
+    <!-- WEEK 2 -->
+    <div class="week-card">
+      <div class="week-header"><span class="week-num">W2</span><span class="week-title">NumPy · Pandas · Linux Deeper · Candlesticks</span></div>
+      <div class="week-body">
+        <div class="day-row"><span class="day-label">MON</span><div class="day-content"><div class="day-main"><span class="tag tag-ds">DS</span>NumPy arrays, slicing, broadcasting, math ops</div><div class="day-sub">CampusX NumPy playlist · Task: 15 NumPy array manipulation exercises</div></div></div>
+        <div class="day-row"><span class="day-label">TUE</span><div class="day-content"><div class="day-main"><span class="tag tag-ds">DS</span>Pandas: Series, DataFrame, read_csv, groupby, merge</div><div class="day-sub">CampusX Pandas series Ep 1–5 · Task: Analyze a Kaggle CSV dataset</div></div></div>
+        <div class="day-row"><span class="day-label">WED</span><div class="day-content"><div class="day-main"><span class="tag tag-ds">DS</span>Matplotlib + Seaborn: line, bar, scatter, heatmap</div><div class="day-sub">WsCube Tech Data Visualization playlist · Task: 5 chart types on one dataset</div></div></div>
+        <div class="day-row"><span class="day-label">THU</span><div class="day-content"><div class="day-main"><span class="tag tag-cy">CY</span>Linux: file permissions, users, processes, grep, awk, sed</div><div class="day-sub">TechHut Linux Fundamentals · Task: Write 3 bash scripts (backup, log parser)</div></div></div>
+        <div class="day-row"><span class="day-label">FRI</span><div class="day-content"><div class="day-main"><span class="tag tag-cy">CY</span>Networking tools: Wireshark intro, ping, traceroute, nmap basics</div><div class="day-sub">David Bombal Wireshark ep 1–3 · Task: Capture and analyze 3 packets</div></div></div>
+        <div class="day-row"><span class="day-label">SAT</span><div class="day-content"><div class="day-main"><span class="tag tag-fx">FX</span>Japanese candlesticks: all patterns, sessions (London/NY/Asia)</div><div class="day-sub">The Trading Channel candlestick playlist · Task: Identify 10 patterns on live chart</div></div></div>
+        <div class="day-row"><span class="day-label">SUN</span><div class="day-content"><div class="day-main"><strong>Week 2 Project:</strong> EDA on Titanic Dataset</div><div class="day-sub">Full Pandas+Matplotlib analysis. Push to GitHub. Write project README.</div></div></div>
+      </div>
+    </div>
+
+    <!-- WEEK 3 -->
+    <div class="week-card">
+      <div class="week-header"><span class="week-num">W3</span><span class="week-title">Statistics · EDA Mastery · Ethical Hacking Intro</span></div>
+      <div class="week-body">
+        <div class="day-row"><span class="day-label">MON</span><div class="day-content"><div class="day-main"><span class="tag tag-ds">DS</span>Descriptive stats: mean, median, std, percentiles, outliers</div><div class="day-sub">CampusX Statistics for ML playlist Ep 1–4 · Task: Stats report on any dataset</div></div></div>
+        <div class="day-row"><span class="day-label">TUE</span><div class="day-content"><div class="day-main"><span class="tag tag-ds">DS</span>Probability, distributions (Normal, Binomial, Poisson)</div><div class="day-sub">CampusX Stats Ep 5–9 · Task: Simulate coin toss / dice roll in Python</div></div></div>
+        <div class="day-row"><span class="day-label">WED</span><div class="day-content"><div class="day-main"><span class="tag tag-ds">DS</span>Hypothesis testing, p-value, confidence intervals</div><div class="day-sub">StatQuest with Josh Starmer (YouTube) · Task: A/B test simulation in Python</div></div></div>
+        <div class="day-row"><span class="day-label">THU</span><div class="day-content"><div class="day-main"><span class="tag tag-cy">CY</span>Ethical hacking intro: phases, types of hackers, legal landscape</div><div class="day-sub">Hacking Simplified YouTube channel Ep 1–5 · Task: Set up Kali + DVWA lab</div></div></div>
+        <div class="day-row"><span class="day-label">FRI</span><div class="day-content"><div class="day-main"><span class="tag tag-cy">CY</span>Nmap deep dive: port scanning, OS detection, scripts</div><div class="day-sub">NetworkChuck Nmap video · Task: Scan your local VM with 10 different nmap flags</div></div></div>
+        <div class="day-row"><span class="day-label">SAT</span><div class="day-content"><div class="day-main"><span class="tag tag-fx">FX</span>Support &amp; Resistance, trend lines, chart patterns (H&amp;S, DTT)</div><div class="day-sub">Rayner Teo Technical Analysis series · Task: Mark S/R on 5 pairs daily chart</div></div></div>
+        <div class="day-row"><span class="day-label">SUN</span><div class="day-content"><div class="day-main"><strong>Week 3 Project:</strong> Python Port Scanner</div><div class="day-sub">Socket-based, multi-threaded. Banner grabbing. Push to GitHub.</div></div></div>
+      </div>
+    </div>
+
+    <!-- WEEK 4 -->
+    <div class="week-card">
+      <div class="week-header"><span class="week-num">W4</span><span class="week-title">Feature Engineering · Metasploit Basics · Indicators</span></div>
+      <div class="week-body">
+        <div class="day-row"><span class="day-label">MON</span><div class="day-content"><div class="day-main"><span class="tag tag-ds">DS</span>Feature engineering: encoding, scaling, missing values</div><div class="day-sub">Krish Naik Feature Engineering playlist · Task: Preprocess 2 messy datasets</div></div></div>
+        <div class="day-row"><span class="day-label">TUE</span><div class="day-content"><div class="day-main"><span class="tag tag-ds">DS</span>Scikit-learn intro: train/test split, cross-validation, metrics</div><div class="day-sub">CampusX ML playlist Ep 1–5 · Task: First model (Linear Regression) on housing data</div></div></div>
+        <div class="day-row"><span class="day-label">WED</span><div class="day-content"><div class="day-main"><span class="tag tag-cy">CY</span>Metasploit Framework: msfconsole, exploits, payloads (lab only)</div><div class="day-sub">TCM Security Free Ethical Hacking Course · Task: Exploit Metasploitable VM</div></div></div>
+        <div class="day-row"><span class="day-label">THU</span><div class="day-content"><div class="day-main"><span class="tag tag-cy">CY</span>Password attacks: Hydra, John the Ripper, wordlists</div><div class="day-sub">Hacking Simplified playlist · Task: Crack MD5 hashes in lab environment</div></div></div>
+        <div class="day-row"><span class="day-label">FRI</span><div class="day-content"><div class="day-main"><span class="tag tag-fx">FX</span>Technical indicators: MA, EMA, RSI, MACD, Bollinger Bands</div><div class="day-sub">Rayner Teo Indicators series · Task: Apply all 5 indicators on TradingView demo</div></div></div>
+        <div class="day-row"><span class="day-label">SAT</span><div class="day-content"><div class="day-main"><span class="tag tag-cl">CL</span>Client hunting prep: Create GitHub, LinkedIn, Upwork profile skeleton</div><div class="day-sub">Tyler Moore Upwork profile video · Task: Fill 100% profile completeness</div></div></div>
+        <div class="day-row"><span class="day-label">SUN</span><div class="day-content"><div class="day-main"><strong>Month 1 Project:</strong> EDA Dashboard with Streamlit</div><div class="day-sub">Any Kaggle dataset. Interactive charts. Deploy free on Streamlit Cloud.</div></div></div>
+      </div>
+    </div>
+  </div>
+
+  <div class="section-title">Month 1 Deliverables Checklist</div>
+  <table class="schedule-table">
+    <tr><th>Item</th><th>Status Target</th><th>Notes</th></tr>
+    <tr><td>Python basics to OOP</td><td>Done</td><td>50+ exercises committed to GitHub</td></tr>
+    <tr><td>NumPy + Pandas fluency</td><td>Done</td><td>Can manipulate any CSV in 30 min</td></tr>
+    <tr><td>Linux CLI competent</td><td>Done</td><td>100 commands used. 3 bash scripts.</td></tr>
+    <tr><td>Networking theory</td><td>Done</td><td>OSI, TCP/IP, DNS can explain from memory</td></tr>
+    <tr><td>Nmap + Metasploitable lab</td><td>Done</td><td>Documented scan results</td></tr>
+    <tr><td>Forex demo account active</td><td>Done</td><td>First 20 demo trades placed</td></tr>
+    <tr><td>GitHub profile</td><td>Active</td><td>4+ repos, green commit graph</td></tr>
+    <tr><td>Streamlit EDA app deployed</td><td>Live</td><td>Link on portfolio</td></tr>
+  </table>
+</div>
+
+<!-- ===== MONTH 2 ===== -->
+<div id="month2" class="tab">
+  <span class="month-badge" style="background:var(--accent2);">Month 2</span>
+  <div class="month-title">Machine Learning · Web Hacking · Price Action · APIs</div>
+  <div class="month-sub">Weeks 5–8 · Go intermediate-to-advanced. Build industry-level projects.</div>
+
+  <div class="week-grid">
+    <!-- WEEK 5 -->
+    <div class="week-card">
+      <div class="week-header"><span class="week-num" style="background:var(--accent2);">W5</span><span class="week-title">Supervised ML + Burp Suite + Price Action</span></div>
+      <div class="week-body">
+        <div class="day-row"><span class="day-label">MON</span><div class="day-content"><div class="day-main"><span class="tag tag-ds">DS</span>Linear &amp; Logistic Regression from scratch + sklearn</div><div class="day-sub">CampusX ML Ep 6–10 · Task: Titanic survival prediction model</div></div></div>
+        <div class="day-row"><span class="day-label">TUE</span><div class="day-content"><div class="day-main"><span class="tag tag-ds">DS</span>Decision Trees, Random Forest, feature importance</div><div class="day-sub">Krish Naik ML playlist · Task: Random Forest on credit card fraud dataset</div></div></div>
+        <div class="day-row"><span class="day-label">WED</span><div class="day-content"><div class="day-main"><span class="tag tag-ds">DS</span>SVM, KNN, Naive Bayes — when to use what</div><div class="day-sub">CampusX Ep 11–15 · Task: Spam classifier with Naive Bayes</div></div></div>
+        <div class="day-row"><span class="day-label">THU</span><div class="day-content"><div class="day-main"><span class="tag tag-cy">CY</span>Burp Suite: intercept, repeater, intruder, scanner setup</div><div class="day-sub">TCM Security Web Course + PortSwigger Web Academy Labs</div></div></div>
+        <div class="day-row"><span class="day-label">FRI</span><div class="day-content"><div class="day-main"><span class="tag tag-cy">CY</span>SQL Injection: manual + sqlmap on DVWA</div><div class="day-sub">John Hammond CTF YouTube · Task: Solve 3 SQLi PortSwigger labs</div></div></div>
+        <div class="day-row"><span class="day-label">SAT</span><div class="day-content"><div class="day-main"><span class="tag tag-fx">FX</span>Price Action: pin bars, engulfing, inside bars, fakey setups</div><div class="day-sub">Nial Fuller's Learn To Trade Blog (YouTube companion) · Task: 20 PA setups annotated</div></div></div>
+        <div class="day-row"><span class="day-label">SUN</span><div class="day-content"><div class="day-main"><strong>Week 5 Project:</strong> End-to-End ML — House Price Predictor</div><div class="day-sub">Scikit-learn pipeline → Flask API → deploy on Render.com</div></div></div>
+      </div>
+    </div>
+
+    <!-- WEEK 6 -->
+    <div class="week-card">
+      <div class="week-header"><span class="week-num" style="background:var(--accent2);">W6</span><span class="week-title">Advanced ML · XSS/CSRF · ICT Concepts · OpenAI API</span></div>
+      <div class="week-body">
+        <div class="day-row"><span class="day-label">MON</span><div class="day-content"><div class="day-main"><span class="tag tag-ds">DS</span>XGBoost, LightGBM, hyperparameter tuning (GridSearchCV)</div><div class="day-sub">CampusX Advanced ML · Task: Kaggle competition submission (any active one)</div></div></div>
+        <div class="day-row"><span class="day-label">TUE</span><div class="day-content"><div class="day-main"><span class="tag tag-ds">DS</span>Model evaluation: ROC-AUC, confusion matrix, cross-val</div><div class="day-sub">StatQuest YouTube · Task: Full evaluation report on 3 models</div></div></div>
+        <div class="day-row"><span class="day-label">WED</span><div class="day-content"><div class="day-main"><span class="tag tag-cy">CY</span>XSS (reflected/stored/DOM), CSRF — find + exploit + fix</div><div class="day-sub">PortSwigger Web Security Academy Labs (XSS section)</div></div></div>
+        <div class="day-row"><span class="day-label">THU</span><div class="day-content"><div class="day-main"><span class="tag tag-cy">CY</span>Authentication attacks, IDOR, broken access control</div><div class="day-sub">TCM Security PEH course · Task: Solve 5 PortSwigger auth labs</div></div></div>
+        <div class="day-row"><span class="day-label">FRI</span><div class="day-content"><div class="day-main"><span class="tag tag-ai">AI</span>OpenAI API: keys, calls, prompt engineering, GPT-4o usage</div><div class="day-sub">Build with AI YouTube + OpenAI docs · Task: Build a CLI AI assistant in Python</div></div></div>
+        <div class="day-row"><span class="day-label">SAT</span><div class="day-content"><div class="day-main"><span class="tag tag-fx">FX</span>ICT concepts: order blocks, fair value gaps, liquidity sweeps</div><div class="day-sub">The Inner Circle Trader (ICT) YouTube Mentorship 2022 · Task: Identify 15 ICT setups</div></div></div>
+        <div class="day-row"><span class="day-label">SUN</span><div class="day-content"><div class="day-main"><strong>Week 6 Project:</strong> AI Email Generator (OpenAI API + Flask)</div><div class="day-sub">Input: tone + topic → Output: professional email. Deploy on Vercel.</div></div></div>
+      </div>
+    </div>
+
+    <!-- WEEK 7 -->
+    <div class="week-card">
+      <div class="week-header"><span class="week-num" style="background:var(--accent2);">W7</span><span class="week-title">Unsupervised ML · OWASP Top 10 · Strategy Building · Docker</span></div>
+      <div class="week-body">
+        <div class="day-row"><span class="day-label">MON</span><div class="day-content"><div class="day-main"><span class="tag tag-ds">DS</span>K-Means, DBSCAN, PCA, dimensionality reduction</div><div class="day-sub">CampusX Unsupervised ML · Task: Customer segmentation project</div></div></div>
+        <div class="day-row"><span class="day-label">TUE</span><div class="day-content"><div class="day-main"><span class="tag tag-ds">DS</span>Recommendation systems (collaborative + content-based)</div><div class="day-sub">Krish Naik Recommendation System video · Task: Movie recommender</div></div></div>
+        <div class="day-row"><span class="day-label">WED</span><div class="day-content"><div class="day-main"><span class="tag tag-cy">CY</span>OWASP Top 10 complete walkthrough — all 10 vulnerabilities</div><div class="day-sub">John Hammond OWASP video + DVWA labs · Task: Document all 10 with PoC</div></div></div>
+        <div class="day-row"><span class="day-label">THU</span><div class="day-content"><div class="day-main"><span class="tag tag-cy">CY</span>TryHackMe: complete "Jr Penetration Tester" path (start)</div><div class="day-sub">tryhackme.com · Task: Complete 5 rooms</div></div></div>
+        <div class="day-row"><span class="day-label">FRI</span><div class="day-content"><div class="day-main"><span class="tag tag-dv">DV</span>Docker: containers, images, Dockerfile, docker-compose</div><div class="day-sub">TechWorld with Nana Docker Tutorial · Task: Containerize your Flask ML app</div></div></div>
+        <div class="day-row"><span class="day-label">SAT</span><div class="day-content"><div class="day-main"><span class="tag tag-fx">FX</span>Trading strategy: define entry, exit, SL, TP rules. Risk:Reward</div><div class="day-sub">Task: Write your first formal strategy document (PDF format)</div></div></div>
+        <div class="day-row"><span class="day-label">SUN</span><div class="day-content"><div class="day-main"><strong>Week 7 Project:</strong> Forex Trading Journal App</div><div class="day-sub">Python + SQLite + Tkinter/Streamlit. Log trades, P&amp;L calc, risk metrics.</div></div></div>
+      </div>
+    </div>
+
+    <!-- WEEK 8 -->
+    <div class="week-card">
+      <div class="week-header"><span class="week-num" style="background:var(--accent2);">W8</span><span class="week-title">ML Deployment · CTF Practice · AWS Intro · Client Hunting Start</span></div>
+      <div class="week-body">
+        <div class="day-row"><span class="day-label">MON</span><div class="day-content"><div class="day-main"><span class="tag tag-ds">DS</span>MLflow for experiment tracking, model versioning</div><div class="day-sub">CampusX MLOps series · Task: Track 5 experiments with MLflow</div></div></div>
+        <div class="day-row"><span class="day-label">TUE</span><div class="day-content"><div class="day-main"><span class="tag tag-ds">DS</span>Deploying models: FastAPI + Docker + Heroku/Render</div><div class="day-sub">Krish Naik Deployment series · Task: Live prediction API for your ML model</div></div></div>
+        <div class="day-row"><span class="day-label">WED</span><div class="day-content"><div class="day-main"><span class="tag tag-cy">CY</span>HackTheBox: complete 3 easy machines. Document writeups.</div><div class="day-sub">IppSec YouTube (retired HTB boxes walkthrough) · Task: 3 box writeups on GitHub</div></div></div>
+        <div class="day-row"><span class="day-label">THU</span><div class="day-content"><div class="day-main"><span class="tag tag-dv">DV</span>AWS: EC2, S3, IAM basics — launch first server</div><div class="day-sub">FreeCodeCamp AWS Certified Cloud Practitioner YouTube · Task: Host static site on S3</div></div></div>
+        <div class="day-row"><span class="day-label">FRI</span><div class="day-content"><div class="day-main"><span class="tag tag-dv">DV</span>Deploy Docker container on AWS EC2</div><div class="day-sub">Task: Your ML Flask app running live on EC2 with domain</div></div></div>
+        <div class="day-row"><span class="day-label">SAT</span><div class="day-content"><div class="day-main"><span class="tag tag-cl">CL</span>Upwork: optimize profile, set hourly rate, write first proposal</div><div class="day-sub">Joshua Mayo Upwork guide · Task: Send 5 proposals using template in Client System tab</div></div></div>
+        <div class="day-row"><span class="day-label">SUN</span><div class="day-content"><div class="day-main"><strong>Month 2 Capstone:</strong> Full ML Web App Deployed on AWS</div><div class="day-sub">Any ML model → FastAPI → Docker → AWS EC2. This is portfolio item #1.</div></div></div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ===== MONTH 3 ===== -->
+<div id="month3" class="tab">
+  <span class="month-badge" style="background:var(--accent3);">Month 3</span>
+  <div class="month-title">Deep Learning · NLP · Advanced Hacking · AI SaaS · Backtesting</div>
+  <div class="month-sub">Weeks 9–12 · Advanced territory. You start charging for skills this month.</div>
+
+  <div class="week-grid">
+    <!-- WEEK 9 -->
+    <div class="week-card">
+      <div class="week-header"><span class="week-num" style="background:var(--accent3);">W9</span><span class="week-title">Deep Learning Foundations + Bug Bounty Recon</span></div>
+      <div class="week-body">
+        <div class="day-row"><span class="day-label">MON</span><div class="day-content"><div class="day-main"><span class="tag tag-ds">DS</span>Neural networks: perceptron, backprop, activations</div><div class="day-sub">3Blue1Brown Neural Networks series + CampusX DL · Task: NN from scratch in NumPy</div></div></div>
+        <div class="day-row"><span class="day-label">TUE</span><div class="day-content"><div class="day-main"><span class="tag tag-ds">DS</span>TensorFlow/Keras: Dense layers, CNN architecture</div><div class="day-sub">CampusX Deep Learning playlist · Task: MNIST classifier with 99% accuracy</div></div></div>
+        <div class="day-row"><span class="day-label">WED</span><div class="day-content"><div class="day-main"><span class="tag tag-ds">DS</span>CNN for image classification: transfer learning (ResNet, VGG)</div><div class="day-sub">Nicholas Renotte TF series · Task: Dog/cat classifier with transfer learning</div></div></div>
+        <div class="day-row"><span class="day-label">THU</span><div class="day-content"><div class="day-main"><span class="tag tag-cy">CY</span>Bug bounty recon: subfinder, amass, httpx, nuclei</div><div class="day-sub">NahamSec Bug Bounty course · Task: Recon on your own domain (lab)</div></div></div>
+        <div class="day-row"><span class="day-label">FRI</span><div class="day-content"><div class="day-main"><span class="tag tag-cy">CY</span>Bug bounty: SSRF, XXE, business logic vulnerabilities</div><div class="day-sub">PortSwigger advanced labs · Task: Solve 5 advanced labs</div></div></div>
+        <div class="day-row"><span class="day-label">SAT</span><div class="day-content"><div class="day-main"><span class="tag tag-fx">FX</span>Risk management: position sizing, risk per trade (1-2% rule), drawdown</div><div class="day-sub">Task: Build risk calculator in Python. Apply to 30 demo trades.</div></div></div>
+        <div class="day-row"><span class="day-label">SUN</span><div class="day-content"><div class="day-main"><strong>Week 9 Project:</strong> Image Classification Web App (CNN + Streamlit)</div><div class="day-sub">Upload image → predict class. Deployed live. Portfolio piece.</div></div></div>
+      </div>
+    </div>
+
+    <!-- WEEK 10 -->
+    <div class="week-card">
+      <div class="week-header"><span class="week-num" style="background:var(--accent3);">W10</span><span class="week-title">NLP + Advanced Web Attacks + Backtesting Engine</span></div>
+      <div class="week-body">
+        <div class="day-row"><span class="day-label">MON</span><div class="day-content"><div class="day-main"><span class="tag tag-ds">DS</span>NLP fundamentals: tokenization, stemming, TF-IDF, Word2Vec</div><div class="day-sub">CampusX NLP playlist Ep 1–6 · Task: Text classifier (sentiment analysis)</div></div></div>
+        <div class="day-row"><span class="day-label">TUE</span><div class="day-content"><div class="day-main"><span class="tag tag-ds">DS</span>Transformers &amp; BERT: HuggingFace, fine-tuning</div><div class="day-sub">HuggingFace course (huggingface.co/course) · Task: Fine-tune BERT on custom data</div></div></div>
+        <div class="day-row"><span class="day-label">WED</span><div class="day-content"><div class="day-main"><span class="tag tag-ds">DS</span>LangChain + RAG system basics</div><div class="day-sub">Krish Naik LangChain playlist · Task: Build QA bot over your own PDF docs</div></div></div>
+        <div class="day-row"><span class="day-label">THU</span><div class="day-content"><div class="day-main"><span class="tag tag-cy">CY</span>Advanced Metasploit: persistence, post-exploitation, pivoting</div><div class="day-sub">TCM Security Advanced PEH · Task: Full compromise chain on lab VM</div></div></div>
+        <div class="day-row"><span class="day-label">FRI</span><div class="day-content"><div class="day-main"><span class="tag tag-cy">CY</span>Write formal pentest report (professional template)</div><div class="day-sub">Task: Document your Metasploitable + DVWA compromise as client report PDF</div></div></div>
+        <div class="day-row"><span class="day-label">SAT</span><div class="day-content"><div class="day-main"><span class="tag tag-fx">FX</span>Backtesting with Python: Backtrader library setup, strategy code</div><div class="day-sub">Backtrader docs + YouTube tutorials · Task: Backtest 1 strategy on 1 year EUR/USD data</div></div></div>
+        <div class="day-row"><span class="day-label">SUN</span><div class="day-content"><div class="day-main"><strong>Week 10 Project:</strong> NLP Sentiment Dashboard (Twitter/News Data)</div><div class="day-sub">Tweepy API → BERT sentiment → live Plotly dashboard. Deployed.</div></div></div>
+      </div>
+    </div>
+
+    <!-- WEEK 11 -->
+    <div class="week-card">
+      <div class="week-header"><span class="week-num" style="background:var(--accent3);">W11</span><span class="week-title">AI SaaS MVP Build + Bug Bounty First Submissions</span></div>
+      <div class="week-body">
+        <div class="day-row"><span class="day-label">MON</span><div class="day-content"><div class="day-main"><span class="tag tag-ai">AI</span>SaaS architecture: Next.js / Flask backend, user auth (JWT)</div><div class="day-sub">Fireship Next.js crash course · Task: Set up auth flow with JWT</div></div></div>
+        <div class="day-row"><span class="day-label">TUE</span><div class="day-content"><div class="day-main"><span class="tag tag-ai">AI</span>Stripe integration: payment, subscription tiers, webhooks</div><div class="day-sub">Stripe official docs + YouTube · Task: Working Stripe checkout in dev mode</div></div></div>
+        <div class="day-row"><span class="day-label">WED</span><div class="day-content"><div class="day-main"><span class="tag tag-ai">AI</span>Build AI Writing SaaS: GPT-4 + user tiers + credits system</div><div class="day-sub">Task: Full MVP — login, generate content, subscription. Working product.</div></div></div>
+        <div class="day-row"><span class="day-label">THU</span><div class="day-content"><div class="day-main"><span class="tag tag-cy">CY</span>Bug bounty: start on HackerOne public programs (low severity)</div><div class="day-sub">HackerOne hacktivity + Nahamsec Recon guide · Task: Submit 2 valid bug reports</div></div></div>
+        <div class="day-row"><span class="day-label">FRI</span><div class="day-content"><div class="day-main"><span class="tag tag-dv">DV</span>AWS: RDS, Lambda, API Gateway — serverless functions</div><div class="day-sub">FreeCodeCamp AWS serverless course · Task: Deploy Lambda function for SaaS backend</div></div></div>
+        <div class="day-row"><span class="day-label">SAT</span><div class="day-content"><div class="day-main"><span class="tag tag-fx">FX</span>Trading psychology: FOMO, revenge trading, journaling system</div><div class="day-sub">Mark Douglas "Trading in the Zone" key concepts (YouTube summaries)</div></div></div>
+        <div class="day-row"><span class="day-label">SUN</span><div class="day-content"><div class="day-main"><strong>Week 11 Project:</strong> AI Chatbot SaaS (MVP Live)</div><div class="day-sub">GPT-4 + multi-turn + auth + Stripe. This is VirexaSoft Product #1.</div></div></div>
+      </div>
+    </div>
+
+    <!-- WEEK 12 -->
+    <div class="week-card">
+      <div class="week-header"><span class="week-num" style="background:var(--accent3);">W12</span><span class="week-title">CI/CD · Advanced NLP App · First Client Push</span></div>
+      <div class="week-body">
+        <div class="day-row"><span class="day-label">MON</span><div class="day-content"><div class="day-main"><span class="tag tag-dv">DV</span>GitHub Actions CI/CD: auto test + auto deploy on push</div><div class="day-sub">TechWorld with Nana CI/CD tutorial · Task: CI/CD pipeline for ML app</div></div></div>
+        <div class="day-row"><span class="day-label">TUE</span><div class="day-content"><div class="day-main"><span class="tag tag-dv">DV</span>Kubernetes basics: pods, services, deployments (theory + local)</div><div class="day-sub">TechWorld Kubernetes Crash Course · Task: Deploy app on Minikube</div></div></div>
+        <div class="day-row"><span class="day-label">WED</span><div class="day-content"><div class="day-main"><span class="tag tag-ds">DS</span>Time Series: ARIMA, LSTM forecasting on financial data</div><div class="day-sub">CampusX Time Series playlist · Task: BTC/stock price prediction with LSTM</div></div></div>
+        <div class="day-row"><span class="day-label">THU</span><div class="day-content"><div class="day-main"><span class="tag tag-ds">DS</span>Build end-to-end ML project for portfolio (complete pipeline)</div><div class="day-sub">Task: Choose domain (healthcare/finance/NLP) — full solution with report</div></div></div>
+        <div class="day-row"><span class="day-label">FRI</span><div class="day-content"><div class="day-main"><span class="tag tag-cl">CL</span>LinkedIn: 500+ connections push, post case study, DM outreach</div><div class="day-sub">Task: Send 20 personalized LinkedIn DMs to potential clients</div></div></div>
+        <div class="day-row"><span class="day-label">SAT</span><div class="day-content"><div class="day-main"><span class="tag tag-cl">CL</span>Portfolio website: build with React/HTML, all projects listed</div><div class="day-sub">Traversy Media Portfolio tutorial · Task: virexasoft.com or GitHub Pages live</div></div></div>
+        <div class="day-row"><span class="day-label">SUN</span><div class="day-content"><div class="day-main"><strong>Month 3 Capstone:</strong> AI SaaS Product v1.0 Launched</div><div class="day-sub">Full launch: product page + Stripe live mode + first paying user goal</div></div></div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ===== MONTH 4 ===== -->
+<div id="month4" class="tab">
+  <span class="month-badge" style="background:var(--accent5);">Month 4</span>
+  <div class="month-title">Advanced Projects · Agency Model · Scale to 5+ Clients</div>
+  <div class="month-sub">Weeks 13–16 · Execution over learning. Revenue target: $2,000–$5,000 first month.</div>
+
+  <div class="week-grid">
+    <!-- WEEK 13 -->
+    <div class="week-card">
+      <div class="week-header"><span class="week-num" style="background:var(--accent5);">W13</span><span class="week-title">Advanced AWS · Final ML Project · Cold Outreach Campaign</span></div>
+      <div class="week-body">
+        <div class="day-row"><span class="day-label">MON</span><div class="day-content"><div class="day-main"><span class="tag tag-dv">DV</span>AWS: CloudFront, Load Balancer, Auto Scaling groups</div><div class="day-sub">Stephane Maarek AWS SAA YouTube · Task: High-availability setup for SaaS</div></div></div>
+        <div class="day-row"><span class="day-label">TUE</span><div class="day-content"><div class="day-main"><span class="tag tag-ds">DS</span>Complete capstone ML project (healthcare/finance domain)</div><div class="day-sub">Task: Full pipeline: EDA → Feature Eng → Model → API → Dashboard</div></div></div>
+        <div class="day-row"><span class="day-label">WED</span><div class="day-content"><div class="day-main"><span class="tag tag-ds">DS</span>Write project case study (client-facing): problem, solution, result</div><div class="day-sub">Task: 800-word case study. Add to portfolio website.</div></div></div>
+        <div class="day-row"><span class="day-label">THU</span><div class="day-content"><div class="day-main"><span class="tag tag-cl">CL</span>Cold email campaign: 50 targeted emails to US/UK/AU businesses</div><div class="day-sub">Template in Client System tab · Tool: Hunter.io + Mailchimp free tier</div></div></div>
+        <div class="day-row"><span class="day-label">FRI</span><div class="day-content"><div class="day-main"><span class="tag tag-cl">CL</span>Fiverr: create 3 gigs (Data Analysis / AI Automation / Cyber Audit)</span></div><div class="day-sub">Task: Keyword-optimized gig titles + SEO descriptions</div></div></div>
+        <div class="day-row"><span class="day-label">SAT</span><div class="day-content"><div class="day-main"><span class="tag tag-fx">FX</span>Full strategy backtest: 6 months historical data, win rate, RR</div><div class="day-sub">Task: Formal backtest report with equity curve chart</div></div></div>
+        <div class="day-row"><span class="day-label">SUN</span><div class="day-content"><div class="day-main"><strong>Week 13 Project:</strong> Full Pentest Report (Professional)</div><div class="day-sub">Conduct full audit on lab + write professional PDF report (Offensive Security style)</div></div></div>
+      </div>
+    </div>
+
+    <!-- WEEK 14 -->
+    <div class="week-card">
+      <div class="week-header"><span class="week-num" style="background:var(--accent5);">W14</span><span class="week-title">SaaS v2.0 · Bug Bounty · Proposal Follow-ups · Demo Trading</span></div>
+      <div class="week-body">
+        <div class="day-row"><span class="day-label">MON</span><div class="day-content"><div class="day-main"><span class="tag tag-ai">AI</span>SaaS v2: add team features, usage analytics, admin dashboard</div><div class="day-sub">Task: VirexaSoft SaaS — version 2 feature complete</div></div></div>
+        <div class="day-row"><span class="day-label">TUE</span><div class="day-content"><div class="day-main"><span class="tag tag-ai">AI</span>Build AI automation tool: n8n / Zapier competitor (niche version)</div><div class="day-sub">Task: Workflow automation product for 1 specific niche (e.g. agencies)</div></div></div>
+        <div class="day-row"><span class="day-label">WED</span><div class="day-content"><div class="day-main"><span class="tag tag-cy">CY</span>Bug bounty: intermediate-level targets. SSRF, subdomain takeover</div><div class="day-sub">Task: 5 total submitted reports by end of month</div></div></div>
+        <div class="day-row"><span class="day-label">THU</span><div class="day-content"><div class="day-main"><span class="tag tag-cl">CL</span>Follow up on all cold emails. Jump on calls. Close deals.</div><div class="day-sub">Script: see Client System tab · Goal: 1 discovery call booked</div></div></div>
+        <div class="day-row"><span class="day-label">FRI</span><div class="day-content"><div class="day-main"><span class="tag tag-cl">CL</span>LinkedIn content: post 3 case studies / value posts this week</div><div class="day-sub">Task: Document a project result as a LinkedIn article. Get 50+ reactions.</div></div></div>
+        <div class="day-row"><span class="day-label">SAT</span><div class="day-content"><div class="day-main"><span class="tag tag-fx">FX</span>30 days demo trading review: analyze all trades, journal every one</div><div class="day-sub">Task: Trading performance report — what works, what doesn't</div></div></div>
+        <div class="day-row"><span class="day-label">SUN</span><div class="day-content"><div class="day-main"><strong>Week 14 Project:</strong> AI Automation SaaS Tool (Niche)</div><div class="day-sub">Specific pain point → AI solution → Stripe subscription. Launch on ProductHunt.</div></div></div>
+      </div>
+    </div>
+
+    <!-- WEEK 15 -->
+    <div class="week-card">
+      <div class="week-header"><span class="week-num" style="background:var(--accent5);">W15</span><span class="week-title">Close First 2 Clients · Agency Setup · Scale Systems</span></div>
+      <div class="week-body">
+        <div class="day-row"><span class="day-label">MON</span><div class="day-content"><div class="day-main"><span class="tag tag-cl">CL</span>Discovery call framework: 10 questions, identify pain, present solution</div><div class="day-sub">Task: Role-play 3 calls. Record yourself. Fix weak spots.</div></div></div>
+        <div class="day-row"><span class="day-label">TUE</span><div class="day-content"><div class="day-main"><span class="tag tag-cl">CL</span>Proposal + contract: scope, deliverables, milestones, payment terms</div><div class="day-sub">Task: Create master proposal template. Create standard contract.</div></div></div>
+        <div class="day-row"><span class="day-label">WED</span><div class="day-content"><div class="day-main"><span class="tag tag-cl">CL</span>Agency model: Notion client management, onboarding doc, SOPs</div><div class="day-sub">Task: VirexaSoft internal wiki in Notion. Client portal setup.</div></div></div>
+        <div class="day-row"><span class="day-label">THU</span><div class="day-content"><div class="day-main"><span class="tag tag-cl">CL</span>Close first client: send proposal, negotiate, sign contract</div><div class="day-sub">Goal: First paid project. Even $200 counts. Start delivering.</div></div></div>
+        <div class="day-row"><span class="day-label">FRI</span><div class="day-content"><div class="day-main"><span class="tag tag-cl">CL</span>Deliver first client work. Ask for testimonial immediately after.</div><div class="day-sub">Task: Over-deliver. 20% more than promised. Screenshot testimonial.</div></div></div>
+        <div class="day-row"><span class="day-label">SAT</span><div class="day-content"><div class="day-main"><span class="tag tag-ds">DS</span>ML + AI: explore LLM fine-tuning, vector databases (Pinecone/Weaviate)</div><div class="day-sub">Task: Fine-tune a small model on domain-specific data</div></div></div>
+        <div class="day-row"><span class="day-label">SUN</span><div class="day-content"><div class="day-main"><strong>Week 15 Goal:</strong> First paying client signed and delivered</div><div class="day-sub">This is the milestone that validates the entire 4 months.</div></div></div>
+      </div>
+    </div>
+
+    <!-- WEEK 16 -->
+    <div class="week-card">
+      <div class="week-header"><span class="week-num" style="background:var(--accent5);">W16</span><span class="week-title">Scale to 3–5 Clients · SaaS Growth · VirexaSoft Launch</span></div>
+      <div class="week-body">
+        <div class="day-row"><span class="day-label">MON</span><div class="day-content"><div class="day-main"><span class="tag tag-cl">CL</span>Referral system: ask every client for 2 referrals immediately</div><div class="day-sub">Script: "If you know anyone with similar challenges, I'd love an intro."</div></div></div>
+        <div class="day-row"><span class="day-label">TUE</span><div class="day-content"><div class="day-main"><span class="tag tag-cl">CL</span>Retainer model: pitch monthly retainer to existing clients</div><div class="day-sub">Task: $500–1500/month retainer proposal. Send to 3 prospects.</div></div></div>
+        <div class="day-row"><span class="day-label">WED</span><div class="day-content"><div class="day-main"><span class="tag tag-ai">AI</span>VirexaSoft official launch: website + 3 service pages + contact</div><div class="day-sub">Task: virexasoft.com live with SEO meta tags, GTM, Google Analytics</div></div></div>
+        <div class="day-row"><span class="day-label">THU</span><div class="day-content"><div class="day-main"><span class="tag tag-cl">CL</span>Hire first contractor: VA or junior dev for repetitive tasks</div><div class="day-sub">Task: Post job on OnlinejobsPH / Upwork for part-time VA ($3–5/hr)</div></div></div>
+        <div class="day-row"><span class="day-label">FRI</span><div class="day-content"><div class="day-main"><span class="tag tag-cl">CL</span>Package your service: define 3 service tiers (Starter/Pro/Enterprise)</div><div class="day-sub">Task: Service deck PDF. Pricing page on virexasoft.com.</div></div></div>
+        <div class="day-row"><span class="day-label">SAT</span><div class="day-content"><div class="day-main">Final review: all 6 domains, portfolio audit, GitHub audit</div><div class="day-sub">Task: Identify top 3 weaknesses. Create 30-day improvement plan.</div></div></div>
+        <div class="day-row"><span class="day-label">SUN</span><div class="day-content"><div class="day-main"><strong>Month 4 End State: VirexaSoft is a real business</strong></div><div class="day-sub">3–5 active clients. $2k–5k/month revenue. SaaS product live. Bug bounty active.</div></div></div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ===== CLIENT SYSTEM ===== -->
+<div id="clients" class="tab">
+  <div class="month-title">Client Hunting System — VirexaSoft</div>
+  <div class="month-sub">The complete execution system. Run this daily from Week 4 onward.</div>
+
+  <div class="section-title">Profile Optimization Checklist</div>
+  <div class="system-grid">
+    <div class="system-card">
+      <h3>Upwork Profile</h3>
+      <ul>
+        <li>Professional headshot (not casual)</li>
+        <li>Title: "AI/ML Engineer | Data Scientist | Cybersecurity Specialist"</li>
+        <li>Hourly rate: Start at $25/hr, increase to $60+ after 3 reviews</li>
+        <li>Overview: 300 words. Problem → Solution → Your results</li>
+        <li>Portfolio: 5 projects with screenshots + live links</li>
+        <li>Skills: list 15+ relevant keywords for algo visibility</li>
+        <li>Test scores: take 3 Upwork skill tests immediately</li>
+      </ul>
+    </div>
+    <div class="system-card">
+      <h3>LinkedIn Profile</h3>
+      <ul>
+        <li>Headline: "Founder @ VirexaSoft | AI/ML | Cybersecurity | Data Science"</li>
+        <li>Banner: custom Canva banner with "VirexaSoft Solutions"</li>
+        <li>About: 3 paragraphs — who you help, how, proof</li>
+        <li>Featured: pin 2 projects with live links</li>
+        <li>Add all certifications as they complete</li>
+        <li>500+ connections in first 90 days</li>
+        <li>Post 3x per week minimum</li>
+      </ul>
+    </div>
+    <div class="system-card">
+      <h3>GitHub Portfolio</h3>
+      <ul>
+        <li>Pin 6 best repos on profile</li>
+        <li>Every repo: detailed README with screenshots</li>
+        <li>Green commit graph every day</li>
+        <li>Add GitHub link to every platform</li>
+        <li>GitHub Pages portfolio site</li>
+        <li>Profile README with skills + social links</li>
+      </ul>
+    </div>
+    <div class="system-card">
+      <h3>Fiverr Gigs (3 Core)</h3>
+      <ul>
+        <li>Gig 1: "I will build a machine learning model for your dataset"</li>
+        <li>Gig 2: "I will create AI automation tools using Python and APIs"</li>
+        <li>Gig 3: "I will perform ethical hacking and web security audit"</li>
+        <li>Prices: Basic $50 / Standard $150 / Premium $400</li>
+        <li>Add video intro (2 min, professional background)</li>
+        <li>FAQ section with 5 common questions</li>
+      </ul>
+    </div>
+  </div>
+
+  <div class="section-title">High-Converting Upwork Proposal Template</div>
+  <div class="proposal">
+    <p><strong style="color:var(--accent);">Subject Line:</strong> Quick question about your [project name] — I've done this before</p>
+    <p>Hi <span class="ph">[Name]</span>,</p>
+    <p>I noticed you need <span class="ph">[specific task from job post — e.g., "a machine learning model to predict customer churn"]</span>. This is exactly what I do at VirexaSoft Solutions.</p>
+    <p>Here's what I'd build for you: <span class="ph">[1-sentence specific solution tailored to their post]</span>.</p>
+    <p>I recently delivered a similar project for a client — <span class="ph">[one-line result, e.g., "reduced their manual data processing by 80% using a Python automation pipeline"]</span>.</p>
+    <p>My approach:</p>
+    <p>→ Day 1–2: Understand your data/requirements fully<br>
+    → Day 3–5: Build and test the solution<br>
+    → Day 6–7: Deploy + documentation + revisions</p>
+    <p>I can start today. Can we jump on a 15-min call to confirm scope?</p>
+    <p>— <span class="ph">[Your Name]</span>, VirexaSoft Solutions</p>
+    <p style="font-size:0.75rem;color:var(--muted);">P.S. Portfolio: <span class="ph">[link]</span> | GitHub: <span class="ph">[link]</span></p>
+  </div>
+
+  <div class="section-title">Cold DM / Email Scripts</div>
+  <div class="week-grid">
+    <div class="week-card">
+      <div class="week-header"><span class="week-num" style="background:var(--yellow);color:#000;">LinkedIn</span><span class="week-title">Cold Connection DM</span></div>
+      <div class="week-body">
+        <div class="script-box">Hi <strong>[Name]</strong>, I came across your profile — impressed by <strong>[specific thing about them]</strong>.<br><br>I run VirexaSoft Solutions, we help <strong>[their industry]</strong> businesses save time and increase revenue using AI automation and data systems.<br><br>Would it be worth a 15-minute chat this week?</div>
+      </div>
+    </div>
+    <div class="week-card">
+      <div class="week-header"><span class="week-num" style="background:var(--accent3);">EMAIL</span><span class="week-title">Cold Email (B2B)</span></div>
+      <div class="week-body">
+        <div class="script-box"><strong>Subject:</strong> Quick idea for [Company Name]<br><br>Hi <strong>[Name]</strong>,<br><br>I help companies like <strong>[company type]</strong> automate manual processes using AI — usually saving 10–30 hours per week.<br><br>I had a specific idea for <strong>[their company]</strong> based on what I saw on your website. Worth a 15-min call?<br><br>— <strong>[Your Name]</strong>, VirexaSoft.com</div>
+      </div>
+    </div>
+  </div>
+
+  <div class="section-title">Daily Client Hunting Routine (1.5 hours/day from Week 4)</div>
+  <table class="schedule-table">
+    <tr><th>Time</th><th>Action</th><th>Target</th></tr>
+    <tr><td>20 min</td><td>Apply to 5 Upwork jobs with customized proposals</td><td>5 proposals/day</td></tr>
+    <tr><td>15 min</td><td>LinkedIn: send 10 connection requests + 3 DMs</td><td>70 DMs/week</td></tr>
+    <tr><td>15 min</td><td>Post or comment on LinkedIn (value-first content)</td><td>1 post + 5 comments</td></tr>
+    <tr><td>15 min</td><td>Reply to all messages across all platforms</td><td>Response time &lt;2hr</td></tr>
+    <tr><td>15 min</td><td>Cold email: 10 personalized emails via Hunter.io leads</td><td>70 emails/week</td></tr>
+    <tr><td>10 min</td><td>Track all outreach in CRM (Notion or Airtable)</td><td>Log every interaction</td></tr>
+  </table>
+
+  <div class="section-title">How to Get First Client — Step by Step</div>
+  <div style="display:grid;gap:0.6rem;">
+    <div style="display:flex;gap:1rem;align-items:flex-start;padding:0.8rem;background:var(--bg2);border-radius:8px;border:1px solid var(--border);">
+      <div style="background:var(--accent);color:#fff;border-radius:50%;width:24px;height:24px;display:flex;align-items:center;justify-content:center;font-size:0.75rem;font-weight:700;flex-shrink:0;">1</div>
+      <div><strong>Warm network first.</strong> <span style="color:var(--muted);font-size:0.83rem;">Message every person you know. "I'm offering freelance data/AI services. Know anyone who needs help?" 1 in 20 will have a lead.</span></div>
+    </div>
+    <div style="display:flex;gap:1rem;align-items:flex-start;padding:0.8rem;background:var(--bg2);border-radius:8px;border:1px solid var(--border);">
+      <div style="background:var(--accent2);color:#fff;border-radius:50%;width:24px;height:24px;display:flex;align-items:center;justify-content:center;font-size:0.75rem;font-weight:700;flex-shrink:0;">2</div>
+      <div><strong>Price to win, not to earn.</strong> <span style="color:var(--muted);font-size:0.83rem;">First 2 clients: charge 50% of your normal rate. Get the testimonial. Then raise prices.</span></div>
+    </div>
+    <div style="display:flex;gap:1rem;align-items:flex-start;padding:0.8rem;background:var(--bg2);border-radius:8px;border:1px solid var(--border);">
+      <div style="background:var(--accent3);color:#fff;border-radius:50%;width:24px;height:24px;display:flex;align-items:center;justify-content:center;font-size:0.75rem;font-weight:700;flex-shrink:0;">3</div>
+      <div><strong>Niche down your pitch.</strong> <span style="color:var(--muted);font-size:0.83rem;">Don't say "I do data science". Say "I help e-commerce stores predict inventory demand using ML". Specific wins.</span></div>
+    </div>
+    <div style="display:flex;gap:1rem;align-items:flex-start;padding:0.8rem;background:var(--bg2);border-radius:8px;border:1px solid var(--border);">
+      <div style="background:var(--accent5);color:#fff;border-radius:50%;width:24px;height:24px;display:flex;align-items:center;justify-content:center;font-size:0.75rem;font-weight:700;flex-shrink:0;">4</div>
+      <div><strong>Follow up 3 times.</strong> <span style="color:var(--muted);font-size:0.83rem;">80% of deals close after 3rd follow-up. Most freelancers give up after 1. Don't.</span></div>
+    </div>
+    <div style="display:flex;gap:1rem;align-items:flex-start;padding:0.8rem;background:var(--bg2);border-radius:8px;border:1px solid var(--border);">
+      <div style="background:var(--yellow);color:#000;border-radius:50%;width:24px;height:24px;display:flex;align-items:center;justify-content:center;font-size:0.75rem;font-weight:700;flex-shrink:0;">5</div>
+      <div><strong>Over-deliver to get referrals.</strong> <span style="color:var(--muted);font-size:0.83rem;">Ask for referral within 24hr of project completion: "Who else do you know that might need this?"</span></div>
+    </div>
+  </div>
+
+  <div class="section-title">Agency Conversion Path (Month 5+)</div>
+  <table class="schedule-table">
+    <tr><th>Stage</th><th>Revenue</th><th>Action</th></tr>
+    <tr><td>Freelancer</td><td>$1k–3k/mo</td><td>Solo delivery, 1–3 clients, build systems</td></tr>
+    <tr><td>Solo Agency</td><td>$3k–7k/mo</td><td>Hire 1 VA + 1 dev contractor, create SOPs</td></tr>
+    <tr><td>Micro Agency</td><td>$7k–15k/mo</td><td>3–5 person team, retainer clients, service packages</td></tr>
+    <tr><td>Full Agency</td><td>$15k+/mo</td><td>Dedicated sales + delivery, VirexaSoft brand established</td></tr>
+  </table>
+</div>
+
+<!-- ===== RESOURCES ===== -->
+<div id="resources" class="tab">
+  <div class="month-title">YouTube Resources — Hindi/Urdu + English</div>
+
+  <div class="section-title">Data Science Channels</div>
+  <div class="link-grid">
+    <a href="https://www.youtube.com/@campusx-official" class="link-card" target="_blank">
+      <div class="link-icon" style="background:rgba(124,111,247,0.2);">📊</div>
+      <div><div class="lname">CampusX</div><div class="ldesc">Best DS/ML in Hindi — Full playlists</div></div>
+    </a>
+    <a href="https://www.youtube.com/@CodeWithHarry" class="link-card" target="_blank">
+      <div class="link-icon" style="background:rgba(124,111,247,0.2);">🐍</div>
+      <div><div class="lname">CodeWithHarry</div><div class="ldesc">Python complete course (Hindi)</div></div>
+    </a>
+    <a href="https://www.youtube.com/@wscubetech" class="link-card" target="_blank">
+      <div class="link-icon" style="background:rgba(124,111,247,0.2);">📈</div>
+      <div><div class="lname">WsCube Tech</div><div class="ldesc">Data Science + Web Dev (Hindi)</div></div>
+    </a>
+    <a href="https://www.youtube.com/@krishnaik06" class="link-card" target="_blank">
+      <div class="link-icon" style="background:rgba(124,111,247,0.2);">🤖</div>
+      <div><div class="lname">Krish Naik</div><div class="ldesc">ML/DL/MLOps full courses</div></div>
+    </a>
+    <a href="https://www.youtube.com/@GateSmashers" class="link-card" target="_blank">
+      <div class="link-icon" style="background:rgba(124,111,247,0.2);">🎓</div>
+      <div><div class="lname">Gate Smashers</div><div class="ldesc">DS Algo + Computer Science theory</div></div>
+    </a>
+    <a href="https://www.youtube.com/@statquest" class="link-card" target="_blank">
+      <div class="link-icon" style="background:rgba(124,111,247,0.2);">📉</div>
+      <div><div class="lname">StatQuest</div><div class="ldesc">Statistics + ML explained visually</div></div>
+    </a>
+  </div>
+
+  <div class="section-title">Cybersecurity Channels</div>
+  <div class="link-grid">
+    <a href="https://www.youtube.com/@TCMSecurityAcademy" class="link-card" target="_blank">
+      <div class="link-icon" style="background:rgba(93,200,165,0.2);">🔐</div>
+      <div><div class="lname">TCM Security</div><div class="ldesc">Best free ethical hacking course</div></div>
+    </a>
+    <a href="https://www.youtube.com/@_JohnHammond" class="link-card" target="_blank">
+      <div class="link-icon" style="background:rgba(93,200,165,0.2);">🏴</div>
+      <div><div class="lname">John Hammond</div><div class="ldesc">CTFs, malware, hacking walkthroughs</div></div>
+    </a>
+    <a href="https://www.youtube.com/@davidbombal" class="link-card" target="_blank">
+      <div class="link-icon" style="background:rgba(93,200,165,0.2);">🌐</div>
+      <div><div class="lname">David Bombal</div><div class="ldesc">Networking + Ethical Hacking</div></div>
+    </a>
+    <a href="https://www.youtube.com/@NetworkChuck" class="link-card" target="_blank">
+      <div class="link-icon" style="background:rgba(93,200,165,0.2);">☕</div>
+      <div><div class="lname">NetworkChuck</div><div class="ldesc">Linux, Networking, Hacking</div></div>
+    </a>
+    <a href="https://www.youtube.com/@ippsec" class="link-card" target="_blank">
+      <div class="link-icon" style="background:rgba(93,200,165,0.2);">📦</div>
+      <div><div class="lname">IppSec</div><div class="ldesc">HackTheBox machine walkthroughs</div></div>
+    </a>
+    <a href="https://www.youtube.com/@NahamSec" class="link-card" target="_blank">
+      <div class="link-icon" style="background:rgba(93,200,165,0.2);">🐛</div>
+      <div><div class="lname">NahamSec</div><div class="ldesc">Bug Bounty hunting techniques</div></div>
+    </a>
+  </div>
+
+  <div class="section-title">Forex Trading Channels</div>
+  <div class="link-grid">
+    <a href="https://www.youtube.com/@RaynerTeo" class="link-card" target="_blank">
+      <div class="link-icon" style="background:rgba(240,144,74,0.2);">💹</div>
+      <div><div class="lname">Rayner Teo</div><div class="ldesc">Best free trading education (Technical Analysis)</div></div>
+    </a>
+    <a href="https://www.youtube.com/@TheTradingChannel" class="link-card" target="_blank">
+      <div class="link-icon" style="background:rgba(240,144,74,0.2);">📊</div>
+      <div><div class="lname">The Trading Channel</div><div class="ldesc">Forex strategies + systems</div></div>
+    </a>
+    <a href="https://www.youtube.com/@InnerCircleTrader" class="link-card" target="_blank">
+      <div class="link-icon" style="background:rgba(240,144,74,0.2);">🎯</div>
+      <div><div class="lname">ICT (Inner Circle Trader)</div><div class="ldesc">Smart money concepts + institutional trading</div></div>
+    </a>
+    <a href="https://www.youtube.com/@UmarAshraf" class="link-card" target="_blank">
+      <div class="link-icon" style="background:rgba(240,144,74,0.2);">🇵🇰</div>
+      <div><div class="lname">Umar Ashraf</div><div class="ldesc">Trading Psychology + Risk Management</div></div>
+    </a>
+  </div>
+
+  <div class="section-title">Freelancing / Client Hunting Channels</div>
+  <div class="link-grid">
+    <a href="https://www.youtube.com/@JoshuaMayo" class="link-card" target="_blank">
+      <div class="link-icon" style="background:rgba(245,200,66,0.2);">💼</div>
+      <div><div class="lname">Joshua Mayo</div><div class="ldesc">Upwork + freelancing income guides</div></div>
+    </a>
+    <a href="https://www.youtube.com/@alexhormozi" class="link-card" target="_blank">
+      <div class="link-icon" style="background:rgba(245,200,66,0.2);">🚀</div>
+      <div><div class="lname">Alex Hormozi</div><div class="ldesc">Offer creation + sales + business scaling</div></div>
+    </a>
+    <a href="https://www.youtube.com/@TylerMooreWeb" class="link-card" target="_blank">
+      <div class="link-icon" style="background:rgba(245,200,66,0.2);">🛠</div>
+      <div><div class="lname">Tyler Moore</div><div class="ldesc">Freelancing tutorials + Upwork tips</div></div>
+    </a>
+    <a href="https://www.youtube.com/@SimonSquibb" class="link-card" target="_blank">
+      <div class="link-icon" style="background:rgba(245,200,66,0.2);">💡</div>
+      <div><div class="lname">Simon Squibb</div><div class="ldesc">Entrepreneurship + client acquisition</div></div>
+    </a>
+  </div>
+
+  <div class="section-title">DevOps / Cloud Channels</div>
+  <div class="link-grid">
+    <a href="https://www.youtube.com/@TechWorldwithNana" class="link-card" target="_blank">
+      <div class="link-icon" style="background:rgba(232,93,93,0.2);">🐳</div>
+      <div><div class="lname">TechWorld with Nana</div><div class="ldesc">Docker, Kubernetes, CI/CD</div></div>
+    </a>
+    <a href="https://www.youtube.com/@freeCodeCamp" class="link-card" target="_blank">
+      <div class="link-icon" style="background:rgba(232,93,93,0.2);">☁️</div>
+      <div><div class="lname">freeCodeCamp</div><div class="ldesc">AWS full courses (free)</div></div>
+    </a>
+    <a href="https://www.youtube.com/@Fireship" class="link-card" target="_blank">
+      <div class="link-icon" style="background:rgba(232,93,93,0.2);">⚡</div>
+      <div><div class="lname">Fireship</div><div class="ldesc">SaaS, Next.js, web tools (fast-paced)</div></div>
+    </a>
+  </div>
+
+  <div class="section-title">Recommended Free Platforms</div>
+  <div class="link-grid">
+    <a href="https://tryhackme.com" class="link-card" target="_blank"><div class="link-icon" style="background:rgba(93,200,165,0.2);">🏠</div><div><div class="lname">TryHackMe</div><div class="ldesc">Guided cybersecurity labs</div></div></a>
+    <a href="https://hackthebox.com" class="link-card" target="_blank"><div class="link-icon" style="background:rgba(93,200,165,0.2);">📦</div><div><div class="lname">HackTheBox</div><div class="ldesc">Real penetration testing challenges</div></div></a>
+    <a href="https://portswigger.net/web-security" class="link-card" target="_blank"><div class="link-icon" style="background:rgba(93,200,165,0.2);">🕷️</div><div><div class="lname">PortSwigger Academy</div><div class="ldesc">Best free web security labs</div></div></a>
+    <a href="https://kaggle.com" class="link-card" target="_blank"><div class="link-icon" style="background:rgba(124,111,247,0.2);">🏆</div><div><div class="lname">Kaggle</div><div class="ldesc">Datasets, competitions, notebooks</div></div></a>
+    <a href="https://huggingface.co/course" class="link-card" target="_blank"><div class="link-icon" style="background:rgba(124,111,247,0.2);">🤗</div><div><div class="lname">HuggingFace Course</div><div class="ldesc">Transformers + NLP (free)</div></div></a>
+    <a href="https://hackerone.com" class="link-card" target="_blank"><div class="link-icon" style="background:rgba(93,200,165,0.2);">💰</div><div><div class="lname">HackerOne</div><div class="ldesc">Bug bounty programs (get paid)</div></div></a>
+  </div>
+</div>
+
+<!-- ===== TRACKER ===== -->
+<div id="tracker" class="tab">
+  <div class="month-title">Weekly Performance Tracker</div>
+  <div class="month-sub">Review every Sunday. Be brutal. No self-deception.</div>
+
+  <div class="section-title">Skill Progression Targets</div>
+  <div style="background:var(--bg2);border:1px solid var(--border);border-radius:10px;padding:1.2rem;margin-bottom:1.5rem;">
+    <div class="tracker-row"><span class="tracker-label">Python</span><div class="bar-bg"><div class="bar-fill" style="width:100%;background:var(--accent);"></div></div><span class="tracker-pct">M4 End</span></div>
+    <div class="tracker-row"><span class="tracker-label">Data Analysis (Pandas)</span><div class="bar-bg"><div class="bar-fill" style="width:100%;background:var(--accent);"></div></div><span class="tracker-pct">M4 End</span></div>
+    <div class="tracker-row"><span class="tracker-label">Machine Learning</span><div class="bar-bg"><div class="bar-fill" style="width:85%;background:var(--accent);"></div></div><span class="tracker-pct">M4 End</span></div>
+    <div class="tracker-row"><span class="tracker-label">Deep Learning / NLP</span><div class="bar-bg"><div class="bar-fill" style="width:70%;background:var(--accent5);"></div></div><span class="tracker-pct">M4 End</span></div>
+    <div class="tracker-row"><span class="tracker-label">Linux / Networking</span><div class="bar-bg"><div class="bar-fill" style="width:90%;background:var(--accent2);"></div></div><span class="tracker-pct">M4 End</span></div>
+    <div class="tracker-row"><span class="tracker-label">Ethical Hacking</span><div class="bar-bg"><div class="bar-fill" style="width:75%;background:var(--accent2);"></div></div><span class="tracker-pct">M4 End</span></div>
+    <div class="tracker-row"><span class="tracker-label">Web Security / Bug Bounty</span><div class="bar-bg"><div class="bar-fill" style="width:65%;background:var(--accent2);"></div></div><span class="tracker-pct">M4 End</span></div>
+    <div class="tracker-row"><span class="tracker-label">Forex Technical Analysis</span><div class="bar-bg"><div class="bar-fill" style="width:80%;background:var(--accent3);"></div></div><span class="tracker-pct">M4 End</span></div>
+    <div class="tracker-row"><span class="tracker-label">AI / SaaS Building</span><div class="bar-bg"><div class="bar-fill" style="width:75%;background:var(--accent5);"></div></div><span class="tracker-pct">M4 End</span></div>
+    <div class="tracker-row"><span class="tracker-label">Docker + AWS</span><div class="bar-bg"><div class="bar-fill" style="width:70%;background:var(--accent4);"></div></div><span class="tracker-pct">M4 End</span></div>
+    <div class="tracker-row"><span class="tracker-label">Client Acquisition</span><div class="bar-bg"><div class="bar-fill" style="width:85%;background:var(--yellow);"></div></div><span class="tracker-pct">M4 End</span></div>
+  </div>
+
+  <div class="section-title">Monthly Checkpoints</div>
+  <div class="checkpoint-grid">
+    <div class="checkpoint">
+      <div class="month">Month 1 Exit</div>
+      <ul>
+        <li>Python + Pandas fluent</li>
+        <li>Kali Linux + Nmap done</li>
+        <li>Demo account active</li>
+        <li>3 GitHub repos live</li>
+        <li>EDA dashboard deployed</li>
+        <li>LinkedIn profile 100%</li>
+      </ul>
+    </div>
+    <div class="checkpoint">
+      <div class="month">Month 2 Exit</div>
+      <ul>
+        <li>5+ ML models built</li>
+        <li>OWASP Top 10 exploited</li>
+        <li>AI API app deployed</li>
+        <li>ML app on AWS EC2</li>
+        <li>First Upwork proposal sent</li>
+        <li>Trading journal system ready</li>
+      </ul>
+    </div>
+    <div class="checkpoint">
+      <div class="month">Month 3 Exit</div>
+      <ul>
+        <li>Deep Learning + NLP projects done</li>
+        <li>2 HackTheBox machines solved</li>
+        <li>AI SaaS MVP live with Stripe</li>
+        <li>Portfolio website live</li>
+        <li>50+ cold outreach sent</li>
+        <li>Backtesting engine built</li>
+      </ul>
+    </div>
+    <div class="checkpoint">
+      <div class="month">Month 4 Exit</div>
+      <ul>
+        <li>First paying client closed</li>
+        <li>$2k–5k revenue target</li>
+        <li>5 bug reports submitted</li>
+        <li>VirexaSoft.com live</li>
+        <li>3 retainer conversations</li>
+        <li>VA/contractor hired</li>
+      </ul>
+    </div>
+  </div>
+
+  <div class="section-title">Weekly Sunday Review Protocol</div>
+  <table class="schedule-table">
+    <tr><th>Question</th><th>Answer Format</th></tr>
+    <tr><td>What did I complete this week?</td><td>List every task done from the roadmap</td></tr>
+    <tr><td>What did I NOT complete?</td><td>List and reschedule — no excuses</td></tr>
+    <tr><td>What is my current GitHub commit count?</td><td>Number (target: 7+ commits/week)</td></tr>
+    <tr><td>How many proposals/outreach did I send?</td><td>Number (target: 35+ per week)</td></tr>
+    <tr><td>Did I stick to the daily schedule?</td><td>Days missed: 0–1 = Pass, 2+ = Identify why</td></tr>
+    <tr><td>What is my biggest current skill gap?</td><td>1 thing — schedule extra time next week</td></tr>
+    <tr><td>What's my Week N+1 primary target?</td><td>1 sentence. Specific and measurable.</td></tr>
+  </table>
+
+  <div class="section-title">Tools Setup Checklist</div>
+  <div class="tools-grid">
+    <div class="tool-card"><div style="font-size:20px;">📝</div><div class="tname">VS Code</div><div class="tuse">Primary editor. Install Python, GitLens, Docker extensions.</div></div>
+    <div class="tool-card"><div style="font-size:20px;">📓</div><div class="tname">Jupyter</div><div class="tuse">Data exploration, ML experiments. Use inside VS Code.</div></div>
+    <div class="tool-card"><div style="font-size:20px;">🐙</div><div class="tname">Git & GitHub</div><div class="tuse">Every project. Daily commits. Profile = your resume.</div></div>
+    <div class="tool-card"><div style="font-size:20px;">🐳</div><div class="tname">Docker</div><div class="tuse">Containerize every app. Consistent environments.</div></div>
+    <div class="tool-card"><div style="font-size:20px;">☁️</div><div class="tname">AWS Free Tier</div><div class="tuse">EC2, S3, Lambda. Sign up with new email for 12mo free.</div></div>
+    <div class="tool-card"><div style="font-size:20px;">🌊</div><div class="tname">Postman</div><div class="tuse">Test every API you build. Essential for SaaS dev.</div></div>
+    <div class="tool-card"><div style="font-size:20px;">🕷️</div><div class="tname">Burp Suite</div><div class="tuse">Community Edition (free). Web security testing.</div></div>
+    <div class="tool-card"><div style="font-size:20px;">📊</div><div class="tname">TradingView</div><div class="tuse">Charting + demo trading. Free plan sufficient.</div></div>
+    <div class="tool-card"><div style="font-size:20px;">📋</div><div class="tname">Notion</div><div class="tuse">Project tracking, client CRM, knowledge base.</div></div>
+    <div class="tool-card"><div style="font-size:20px;">🔍</div><div class="tname">Hunter.io</div><div class="tuse">Find business emails for cold outreach (free 25/mo)</div></div>
+  </div>
+</div>
+
+<footer>
+  ◈ VirexaSoft Solutions — 4-Month Elite Execution Protocol<br>
+  Built for one purpose: Zero to industry-ready, revenue-generating, international-client-facing professional.<br>
+  <span style="color:var(--accent);">No days off. No excuses. Execute.</span>
+</footer>
+
+<script>
+  function show(id) {
+    document.querySelectorAll('.tab').forEach(t => t.classList.remove('active'));
+    document.querySelectorAll('nav button').forEach(b => b.classList.remove('active'));
+    document.getElementById(id).classList.add('active');
+    event.target.classList.add('active');
+    window.scrollTo(0, 0);
+  }
+</script>
+</body>
+</html>
